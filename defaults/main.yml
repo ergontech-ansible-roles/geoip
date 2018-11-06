@@ -1,0 +1,11 @@
+---
+
+geoip_packages:
+  - libmaxminddb0
+  - libmaxminddb-dev
+  - mmdb-bin
+  - geoipupdate
+
+geoip_databases: GeoLite2-Country
+geoip_user: "{{ ansible_ssh_user }}"
+geoip_config_location: "/home/{{ geoip_user }}/GeoIp.conf"
