@@ -36,7 +36,8 @@
     - geoip
 
 - name: Update GeoIp Databases
-  shell: "ls"
+  shell: "geoipupdate -f {{ geoip_config_location }}"
+  changed_when: false
   tags:
     - geoip
     - geoip-db-update
