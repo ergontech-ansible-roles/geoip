@@ -1,2 +1,43 @@
 ---
 
+- name: Add MaxMind PPA
+  become: yes
+  apt_repository:
+    repo: ppa:maxmind/ppa
+    update_cache: yes
+  tags:
+  - geoip
+
+- name: Ensure GeoIp packages are installed
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ geoip_packages }}"
+  tags:
+    - geoip
+
+- name: Configure GeoIp
+  template:
+    src: templates/GeoIp.conf.j2
+    dest: "{{ geoip_config_location }}"
+  tags:
+    - geoip
+
+- name: Ensure permissions on GeoIp Database locations
+  become: yes
+  file:
+    path: /usr/share/GeoIP
+    owner: "{{ geoip_user }}"
+    group: "{{ geoip_group }}"
+    state: directory
+    recurse: yes
+  tags:
+    - geoip
+
+- name: Update GeoIp Databases
+  shell: "geoipupdate -f {{ geoip_config_location }}"
+  changed_when: false
+  tags:
+    - geoip
+    - geoip-db-update
