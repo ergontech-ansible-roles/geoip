@@ -29,7 +29,7 @@
   file:
     path: /usr/share/GeoIP
     owner: "{{ geoip_user }}"
-    group: "{{ geoip_user }}"
+    group: "{{ geoip_group }}"
     state: directory
     recurse: yes
   tags:

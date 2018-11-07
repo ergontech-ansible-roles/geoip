@@ -16,8 +16,13 @@ geoip_packages:
 
 geoip_databases: GeoLite2-Country
 geoip_user: "{{ ansible_ssh_user }}"
+geoip_group: "{{ ansible_ssh_user }}"
 geoip_config_location: "/home/{{ geoip_user }}/GeoIp.conf"
 ```
+
+Few notes:
+0. geoip_databases is a string, if more databses are required, it is still a string - "GeoLite2-Country GeoLite2-City" (See docs noted above)
+0. geoip_user needs to be a system user with a home directory
 
 ----------------
 
