@@ -10,3 +10,5 @@ geoip_databases: GeoLite2-Country
 geoip_user: "{{ ansible_ssh_user }}"
 geoip_group: "{{ ansible_ssh_user }}"
 geoip_config_location: "/home/{{ geoip_user }}/GeoIp.conf"
+geoip_account:
+geoip_license_key:
